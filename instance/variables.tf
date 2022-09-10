@@ -16,3 +16,6 @@ variable "ingress_rules" {
 
 variable "public_key" {
 }
+
+variable "egress_rules" {
+}
