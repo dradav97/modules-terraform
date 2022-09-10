@@ -13,6 +13,18 @@ resource "aws_instance" "platzi_instance" {
   tags = var.tags
   security_groups = ["${aws_security_group.ssh_conection.name}"]
   key_name = aws_key_pair.deployer.key_name
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      private_key = "${file("~/.ssh/packer-key")}"
+      host = self.public_ip
+    }
+    inline = [
+      "echo hello",
+      "docker run -it -d -p 80:80 dradav97/hello-terraform:v1"
+    ]
+  }
 }
 
 resource "aws_security_group" "ssh_conection" {
