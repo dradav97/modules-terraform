@@ -13,3 +13,6 @@ variable "sg_name" {
 
 variable "ingress_rules" {
 }
+
+variable "public_key" {
+}
